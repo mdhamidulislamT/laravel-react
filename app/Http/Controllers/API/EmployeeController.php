@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
@@ -17,11 +18,33 @@ class EmployeeController extends Controller
       }
 
 
-      public function create(Request $request){
+        // $response=$request->all();
+        // return $response;
+        public function create(Request $request){
 
-        $response=$request->all();
-         
-        return $response;
-      }
+          try {
+
+    
+            $insert['name_lastname'] = $request['name'];
+            $insert['email'] = $request['email'];
+            $insert['city'] = $request['city'];
+            $insert['direction'] = $request['address'];
+            $insert['phone'] = $request['phone'];
+            $insert['rol'] = $request['rol'];
+    
+            Employee::insert($insert);
+    
+            $response['message'] = "Save succesful";
+            $response['succes'] = true;
+    
+          } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['succes'] = true;
+          }
+           
+          return $response;
+        }
+
+        
 
 }
