@@ -25,12 +25,12 @@ class EmployeeController extends Controller
           try {
 
             $employee =new Employee();
-            
+
             $employee->name_lastname = $request->name;
             $employee->email = $request->email;
             $employee->city = $request->city;
             $employee->direction = $request->address;
-            $employee->phone = "0".$request->phone;
+            $employee->phone = $request->phone;
             $employee->rol = $request->rol;
             $result = $employee->save();
             if ($result) {
@@ -43,6 +43,24 @@ class EmployeeController extends Controller
             $response['succes'] = true;
           }
            
+          return $response;
+        }
+
+        public function list(){
+          try {
+
+              $data = Employee::with('role')->get();
+              $response['data'] = $data;
+
+              $response['message'] = "Data Load succesful";
+              $response['succes'] = true;
+
+          } catch (\Exception $e) {
+
+            $response['message'] = $e->getMessage();
+            $response['succes'] = true;
+          }
+
           return $response;
         }
 

@@ -14,7 +14,7 @@ Route::get('/employee', [EmployeeController::class,'index']);
 
 // Route::get('/employee/index', 'App\Http\Controllers\EmployeeController@index');
 
-Route::get('/employee/list', 'App\Http\Controllers\EmployeeController@index');
+//Route::get('/employee/list', 'App\Http\Controllers\EmployeeController@index');
 Route::get('/employee/form', 'App\Http\Controllers\EmployeeController@index');
 Route::get('/employee/edit/{num}', 'App\Http\Controllers\EmployeeController@index');
 

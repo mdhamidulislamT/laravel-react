@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import employeeServices from '../services/Employee';
-
+  
 function Form(){
 
   const [ name, setName ] = useState(null);
@@ -14,14 +14,14 @@ function Form(){
   useEffect(() => {
     async function fetchDataRol() {
       // load data from API
-      const res = await employeeServices.list();
+      const res = await employeeServices.listRole();
       setListRol(res.data)
     }
     fetchDataRol();
   },[]);
 
-  const saveEmployee = async () => {
 
+  const saveEmployee = async () => {
     const data = {
       name, email, city, address, phone, rol
     }
