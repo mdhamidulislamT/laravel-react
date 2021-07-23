@@ -24,18 +24,19 @@ class EmployeeController extends Controller
 
           try {
 
-    
-            $insert['name_lastname'] = $request['name'];
-            $insert['email'] = $request['email'];
-            $insert['city'] = $request['city'];
-            $insert['direction'] = $request['address'];
-            $insert['phone'] = $request['phone'];
-            $insert['rol'] = $request['rol'];
-    
-            Employee::insert($insert);
-    
-            $response['message'] = "Save succesful";
-            $response['succes'] = true;
+            $employee =new Employee();
+            
+            $employee->name_lastname = $request->name;
+            $employee->email = $request->email;
+            $employee->city = $request->city;
+            $employee->direction = $request->address;
+            $employee->phone = "0".$request->phone;
+            $employee->rol = $request->rol;
+            $result = $employee->save();
+            if ($result) {
+              $response['message'] = "Save succesful";
+              $response['succes'] = true;
+            }
     
           } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
