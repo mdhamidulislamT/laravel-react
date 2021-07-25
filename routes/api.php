@@ -28,3 +28,4 @@ Route::get('/employee/get/{id}', 'App\Http\Controllers\API\EmployeeController@ge
 
 Route::post('/employee/update', 'App\Http\Controllers\API\EmployeeController@update');
 
+Route::delete('/employee/delete/{id}', 'App\Http\Controllers\API\EmployeeController@delete');

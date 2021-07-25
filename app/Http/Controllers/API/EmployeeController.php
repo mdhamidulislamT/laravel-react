@@ -98,30 +98,51 @@ class EmployeeController extends Controller
 
     public function update(Request $request){
 
-      $id = $request->id;
+        $id = $request->id;
 
-      try {
+        try {
 
-        $employee = Employee::find($id);
+          $employee = Employee::find($id);
 
-        $employee->name_lastname = $request->name;
-        $employee->email = $request->email;
-        $employee->city = $request->city;
-        $employee->direction = $request->address;
-        $employee->phone = $request->phone;
-        $employee->rol = $request->rol;
-        $result = $employee->save();
-        if ($result) {
-          $response['message'] = "update succesful";
+          $employee->name_lastname = $request->name;
+          $employee->email = $request->email;
+          $employee->city = $request->city;
+          $employee->direction = $request->address;
+          $employee->phone = $request->phone;
+          $employee->rol = $request->rol;
+          $result = $employee->save();
+          if ($result) {
+            $response['message'] = "update succesful";
+            $response['succes'] = true;
+          }
+
+        } catch (\Exception $e) {
+          $response['message'] = $e->getMessage();
           $response['succes'] = true;
         }
-
-      } catch (\Exception $e) {
-        $response['message'] = $e->getMessage();
-        $response['succes'] = true;
-      }
        
+    return $response;
+
+    }
+
+    public function delete($id){
+      
+          try {
+
+            $data = Employee::find($id)->delete();
+            $response['data'] = $data;
+
+            $response['message'] = "Data  deleted";
+            $response['succes'] = true;
+
+        } catch (\Exception $e) {
+
+          $response['message'] = $e->getMessage();
+          $response['succes'] = false;
+        }
+
   return $response;
+
 
     }
         

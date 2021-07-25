@@ -39,7 +39,7 @@ function Edit(props){
     //console.log(res.data.name_lastname)
     setEmail(res.data.email)
     setCity(res.data.city)
-    setAddress(res.data.address)
+    setAddress(res.data.direction)
     setPhone(res.data.phone)
     setRol(res.data.rol)
 
@@ -59,7 +59,7 @@ function Edit(props){
   }, [])
   
 
-  //when save button is clicked, this saveEmployee WORKs--//
+  //when update button is clicked, this updateEmployee WORKs--//
   const updateEmployee = async () => {
     const data = {
       id ,name, email, city, address, phone, rol
@@ -74,6 +74,9 @@ function Edit(props){
       alert(res.message)
     }
   }
+
+  
+
 
 
   return (
@@ -109,7 +112,7 @@ function Edit(props){
       <div className="row">
         <div className="col-md-6 mb-3">
           <label for="address">Address</label>
-          <input type="text" name="address" className="form-control" placeholder="1234 Main St" onChange={(event)=>setAddress(event.target.value)} />
+          <input type="text" name="address" className="form-control" value={address} onChange={(event)=>setAddress(event.target.value)} />
         </div>
       </div>
 
