@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
-Route::get('/employee', [EmployeeController::class,'index']);
+Route::get('/', [EmployeeController::class,'index']);
 
 // Route::get('/employee/index', 'App\Http\Controllers\EmployeeController@index');
 

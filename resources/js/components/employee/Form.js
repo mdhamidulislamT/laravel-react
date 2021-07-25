@@ -14,13 +14,16 @@ function Form(){
   useEffect(() => {
     async function fetchDataRol() {
       // load data from API
-      const res = await employeeServices.listRole();
+      const res = await employeeServices.list();
       setListRol(res.data)
     }
+
     fetchDataRol();
+  
   },[]);
 
 
+  //when save button is clicked, this saveEmployee WORKs--//
   const saveEmployee = async () => {
     const data = {
       name, email, city, address, phone, rol
@@ -83,8 +86,8 @@ function Form(){
       <div class="row">
         <div class="col-md-6 mb-3">
 					<label for="phone">Rol </label>
-					<select id="inputState" name="rol" class="form-control" onChange={(event)=> setRol(event.target.value)}>
-             <option selected>Choose...</option>
+					<select id="inputState" name="rol" class="form-control" onChange={(event)=> setRol(event.target.value)} >
+             <option>Choose...</option>
              {
                listRol.map((item)=>{
                  return(
@@ -95,6 +98,7 @@ function Form(){
           </select>
         </div>
       </div>
+
 
       <div className="row">
         <div className="col-md-6 mb-3">
