@@ -1,52 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import employeeServices from '../services/Employee'
-import { Link } from "react-router-dom";
-
-
-
+import { Link, useHistory } from "react-router-dom";
 
 function List(){
 
+  let history = useHistory();
   const [ listEmployee, setListEmployee ] = useState([]);
 
   useEffect(() =>{
-   
+
     fetchDataEmployee();
-  
+    // fetchDataStudent();
+
   }, [])
+
+//----get students-list from laravel-course----//
+  // const fetchDataStudent = async ()=>{
+  //   const res = await employeeServices.listStudent();
+  //   console.log(res)
+  // }
+
+
 
   const fetchDataEmployee = async ()=>{
     const res = await employeeServices.listEmployee();
     console.log(res.data);
+    //console.log(res.data);
     setListEmployee(res.data);
   }
 
   //--When delete button is clicked --//
   const onClickDelete = async (i,id) => {
 
-    var yes = confirm("are you sure to delete this item?");
-    if (yes === true){
+    // var yes = confirm("are You sure to delete this item ?="+id);
+    // if (yes === true){
 
       const res = await employeeServices.delete(id)
 
-      if (res.success) {
-        alert(res.message) 
+      if (res.success) { 
         const newList = listEmployee
         newList.splice(i,1)
         setListEmployee(newList);
+        fetchDataEmployee();
+        //alert(res.message);
       }
-      else{
-        alert(res.message);
-      }
-    }
+    //   else{
+    //     //alert(res.message);
+    //   }
+    // // }
     //-End delete button--//
 
   }
 
-
-
   return (
     <section>
+              <h4 className="text-center bg-warning p-3">Emplyee List</h4>
       <table className="table">
         <thead className="thead-dark">
           <tr>
@@ -57,7 +65,7 @@ function List(){
             <th scope="col"> Address </th>
             <th scope="col"> Phone </th>
             <th scope="col"> Role </th>
-            <th scope="col"> Actionssss </th>
+            <th scope="col"> Actions </th>
           </tr>
         </thead>
         <tbody>
@@ -71,14 +79,12 @@ function List(){
                 <td> {item.email} </td>
                 <td> {item.city} </td>
                 <td> {item.direction} </td>
-                <td> {item.phone} </td>
-                <td> {item.rol} </td>
+                <td> 0{item.phone} </td>
+                <td>  {item.rol_name} ( {item.rol} ) </td>
                 
-                <td>
-                  <Link class="btn btn-outline-info" to={"/employee/edit/"+item.id}> Edit </Link>
-                  <a class="btn btn-danger" onClick={()=>onClickDelete(i,item.id)}> Delete </a>
-
-                 
+                <td className="d-flex">
+                  <Link class="btn btn-outline-info " to={"/employee/edit/"+item.id}> Edit </Link>  
+                  <a class="btn btn-danger" onClick={()=>onClickDelete(i,item.id)}> Delete </a>                 
                 </td>
               </tr>
               )

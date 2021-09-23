@@ -5,18 +5,13 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
-Route::get('/employee', [EmployeeController::class,'index']);
 
-// Route::get('/employee/index', 'App\Http\Controllers\EmployeeController@index');
+Route::get('{ReactRoutePath}', function () {
+    return view('home');
+})->where('ReactRoutePath', '.*');
 
-//Route::get('/employee/list', 'App\Http\Controllers\EmployeeController@index');
-Route::get('/employee/form', 'App\Http\Controllers\EmployeeController@index');
-Route::get('/employee/edit/{num}', 'App\Http\Controllers\EmployeeController@index');
 
 
 
